@@ -46,7 +46,8 @@ def contact():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['username'] != 'admin' or \
+                request.form['password'] != 'admin':
             error = 'Please try again'
         else:
             return redirect(url_for('index'))
