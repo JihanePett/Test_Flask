@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
@@ -14,6 +14,7 @@ def index():
 @app.route('/about')
 def about():
     data = []
+
     with open("data/company.json", "r") as json_data:
         data = json.load(json_data)
     return render_template("about.html", page_title="About", company=data)
@@ -22,7 +23,8 @@ def about():
 @app.route('/about/<meal_strMeal>')
 def about_meal(meal_strMeal):
     meal = {}
-    with open("data/meal.json", "r") as json_data:
+
+    with open("data/company.json", "r") as json_data:
         data = json.load(json_data)
         for obj in data:
             if obj["url"] == meal_strMeal:
@@ -40,9 +42,15 @@ def contact():
     return render_template("contact.html", page_title="Contact")
 
 
-@app.route('/careers')
-def careers():
-    return render_template("careers.html", page_title="Careers")
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Please try again'
+        else:
+            return redirect(url_for('index'))
+    return render_template('login.html', error=error)
 
 
 if __name__ == '__main__':
