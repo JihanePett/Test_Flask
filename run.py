@@ -22,7 +22,6 @@ def about():
 @app.route('/about/<meal_strMeal>')
 def about_meal(meal_strMeal):
     meal = {}
-
     with open("data/meal.json", "r") as json_data:
         data = json.load(json_data)
         for obj in data:

@@ -1,1 +1,28 @@
 <!DOCTYPE html>
+{% extends 'base.html' %} {% block content %}
+<h2>{{ page_title }}</h2>
+
+<p>Ever felt like you running out of cooking ideas? Your search is now ending! Look up all the nice recipes you can make</p>
+
+{% for member in company %} {% if loop.index % 2 != 0 %}
+<div class="row featurette">
+    <div class="col-md-7">
+        <h3><a href="/about/{{ meal.url }}">{{ loop.index }}. {{ meal.strMeal }}</a></h3>
+        <p>{{ meal.strInstructions }}</p>
+    </div>
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive" src="{{ meal.strMealThumb }}" alt="Picture of {{ meal.strMeal }}">
+    </div>
+</div>
+{% else %}
+<div class="row featurette">
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive" src="{{ meal.strMealThumb }}" alt="Picture of {{ meal.strMeal }}">
+    </div>
+    <div class="col-md-7">
+        <h3><a href="/about/{{ meal.url }}">{{ loop.index }}. {{ meal.strMeal }}</a></h3>
+        <p>{{ meal.strInstructions }}</p>
+    </div>
+</div>
+{% endif %} {% if loop.index != 13 %}
+<hr class="featurette-divider"> {% endif %} {% endfor %} {% endblock %}
