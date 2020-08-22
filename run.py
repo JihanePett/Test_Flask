@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
+messages = []
 
 
 @app.route('/')
@@ -53,7 +54,31 @@ def login():
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
+"""
+def add_messages(username, message):
+    """add messages to message list"""
+    messages.append("{}:{}".format(username, message))
 
+
+@app.route('/')
+def msg():
+    """Main page for instructions"""
+    return "to send a message us/USERNAME/MESSAGE"
+
+
+@app.route('/<username>')
+def user(username):
+    """display chat message"""
+    return "Welcome, {0}, {1}".format(username, messages)
+
+
+@app.route('/<username>/<message>')
+def send_message(username, message):
+    """Create a new message an redirect to chat page"""
+    add_messages(username, message)
+    return redirect('/' + username)
+
+"""
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
