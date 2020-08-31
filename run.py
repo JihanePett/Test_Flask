@@ -9,20 +9,14 @@ messages = []
 
 @app.route('/')
 def index():
-    return render_template("index.html")
-
-
-@app.route('/about')
-def about():
     data = []
-
     with open("data/company.json", "r") as json_data:
         data = json.load(json_data)
-    return render_template("about.html", page_title="About", company=data)
+    return render_template("index.html", page_title="Home", company=data)
 
 
-@app.route('/about/<meal_strMeal>')
-def about_meal(meal_strMeal):
+@app.route('/index/<meal_strMeal>')
+def index_meal(meal_strMeal):
     meal = {}
 
     with open("data/company.json", "r") as json_data:
@@ -32,6 +26,11 @@ def about_meal(meal_strMeal):
                 meal = obj
 
     return render_template("meal.html", meal=meal)
+
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 
 @app.route('/contact', methods=["GET", "POST"])
@@ -54,7 +53,7 @@ def login():
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
-"""
+
 def add_messages(username, message):
     """add messages to message list"""
     messages.append("{}:{}".format(username, message))
@@ -78,7 +77,7 @@ def send_message(username, message):
     add_messages(username, message)
     return redirect('/' + username)
 
-"""
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

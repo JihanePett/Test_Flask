@@ -1,28 +1,61 @@
+
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
-<h2>{{ page_title }}</h2>
 
-<p>Ever felt like you running out of cooking ideas? Your search is now ending! Look up all the nice recipes you can make</p>
-
-{% for meal in company %} {% if loop.index % 2 != 0 %}
-<div class="row featurette">
-    <div class="col-md-7">
-        <h3><a href="/about/{{ meal.url }}">{{ loop.index }}. {{ meal.strMeal }}</a></h3>
-        <p>{{ meal.strInstructions }}</p>
-    </div>
-    <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="{{ meal.strMealThumb }}" alt="Picture of {{ meal.strMeal }}">
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview">
+                <h2 class="post-title">
+                    My Story
+                </h2>
+                <h4 class="post-subtitle">
+                    “I've met many people in Europe. <br>I've even met myself there“ <br>James Baldwin
+                </h4>
+                <p>My name is Catherine, With hindsight, I have noticed that with another culture, another country, other
+people, gastronomy is my point of reference or comparison. Through food, I can feel a sense of home and sense of community. Driven by a culinary curiosity, an
+interest in new tastes and original shapes my favourite go to place are the local markets and places, where i can discover special spices, local vegetables and
+fruits. Whenever I have the opportunity, I sneak in local kitchens to furtively check on and learn cooking techniques.
+You understand, I love people, travels and food. Like many of us! 
+So I am happy to invite you to browse my pages, my recipes</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+                <h2 class="post-title">
+                    Discover my 2 cooking techniques!
+                </h2>
+            <p>My first relationship with cooking was really from scratch.</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+            <a href="post.html">
+                <h2 class="post-title">
+                    Science has not yet mastered prophecy
+                </h2>
+                <h3 class="post-subtitle">
+                    We predict too much for the next year and yet far too little for the next ten.
+                </h3>
+            </a>
+            <p class="post-meta">Posted by
+                <a href="#">Start Bootstrap</a> on August 24, 2017</p>
+        </div>
+        <hr>
+        <div class="post-preview">
+            <a href="post.html">
+                <h2 class="post-title">
+                    Failure is not an option
+                </h2>
+                <h3 class="post-subtitle">
+                    Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+                </h3>
+            </a>
+            <p class="post-meta">Posted by
+                <a href="#">Start Bootstrap</a> on July 8, 2017</p>
+        </div>
+        <hr>
+        <!-- Pager -->
+        <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
     </div>
 </div>
-{% else %}
-<div class="row featurette">
-    <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="{{ meal.strMealThumb }}" alt="Picture of {{ meal.strMeal }}">
-    </div>
-    <div class="col-md-7">
-        <h3><a href="/about/{{ meal.url }}">{{ loop.index }}. {{ meal.strMeal }}</a></h3>
-        <p>{{ meal.strInstructions }}</p>
-    </div>
-</div>
-{% endif %} {% if loop.index != 13 %}
-<hr class="featurette-divider"> {% endif %} {% endfor %} {% endblock %}
+{% endblock %}
